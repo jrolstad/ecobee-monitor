@@ -40,6 +40,18 @@ namespace EcobeeMonitor.Core.Orchestrators
             await _secretClient.SetSecretAsync(SecretNames.EcobeeRefreshToken, token.RefreshToken);
         }
 
-        
+        public async Task<string> GetAccessToken()
+        {
+            var clientId = await _secretClient.GetSecretAsync(SecretNames.EcobeeClientId);
+            var refreshToken = await _secretClient.GetSecretAsync(SecretNames.EcobeeRefreshToken);
+
+            var token = await _ecobeeService.RefreshAccessToken(clientId.Value.Value, refreshToken.Value.Value);
+
+            await _secretClient.SetSecretAsync(SecretNames.EcobeeRefreshToken, token.RefreshToken);
+
+            return token.AccessToken;
+        }
+
+
     }
 }

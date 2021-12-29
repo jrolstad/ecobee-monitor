@@ -11,18 +11,21 @@ namespace EcobeeMonitor.Core.Orchestrators
     public class RuntimeReportOrchestrator
     {
         private readonly EcobeeService _ecobeeService;
+        private readonly AuthorizationOrchestrator _authorizationOrchestrator;
         private readonly SecretClient _secretClient;
 
         public RuntimeReportOrchestrator(EcobeeService ecobeeService,
-            SecretClient secretClient)
+            AuthorizationOrchestrator authorizationOrchestrator)
         {
             _ecobeeService = ecobeeService;
-            _secretClient = secretClient;
+            _authorizationOrchestrator = authorizationOrchestrator;
         }
 
         public async Task CaptureData()
         {
-            
+            var token = await _authorizationOrchestrator.GetAccessToken();
+
+
         }
 
     }
