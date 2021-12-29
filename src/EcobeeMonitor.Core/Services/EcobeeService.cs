@@ -3,6 +3,7 @@ using EcobeeMonitor.Core.Models;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace EcobeeMonitor.Core.Services
 {
@@ -25,9 +26,23 @@ namespace EcobeeMonitor.Core.Services
             var response = await client.GetAsync(url);
 
             response.EnsureSuccessStatusCode();
-            
-            var body = await response.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<AuthorizationResult>(body);
+            var data = await response.Content.ReadAsAsync<AuthorizationResult>();
+
+            return data;
+        }
+
+        public async Task<TokenResult> RequestAccessToken(string clientId, 
+            string code,
+            string grantType = "ecobeePin",
+            string tokenType="jwt")
+        {
+            var url = $"https://api.ecobee.com/token?grant_type={grantType}&code={code}&client_id={clientId}&ecobee_type={tokenType}";
+
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.PostAsync(url, null);
+
+            response.EnsureSuccessStatusCode();
+            var data = await response.Content.ReadAsAsync<TokenResult>();
 
             return data;
         }

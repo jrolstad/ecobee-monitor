@@ -1,6 +1,7 @@
 using EcobeeMonitor.Core.Orchestrators;
 using EcobeeMonitor.Worker.Models;
 using Microsoft.Azure.Functions.Worker;
+using System.Threading.Tasks;
 
 namespace EcobeeMonitor.Worker
 {
@@ -14,9 +15,9 @@ namespace EcobeeMonitor.Worker
         }
 
         [Function("runtimereport-retrieve")]
-        public void Run([TimerTrigger("0 */1 * * * *")] TimerInfo myTimer)
+        public Task Run([TimerTrigger("0 */1 * * * *")] TimerInfo myTimer)
         {
-            _orchestrator.CaptureData();
+            return _orchestrator.CaptureData();
         }
     }
 }

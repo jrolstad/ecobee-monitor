@@ -15,6 +15,7 @@ namespace EcobeeMonitor.Core.Configuration
         {
             services.AddHttpClient();
 
+            services.AddTransient<AuthorizationOrchestrator>();
             services.AddTransient<RuntimeReportOrchestrator>();
 
             services.AddTransient<EcobeeService>();

@@ -22,15 +22,8 @@ namespace EcobeeMonitor.Core.Orchestrators
 
         public async Task CaptureData()
         {
-            var clientId = await _secretClient.GetSecretAsync(SecretNames.EcobeeClientId);
-            var refreshToken = await _secretClient.GetSecretAsync(SecretNames.EcobeeRefreshToken);
-
-            if(string.IsNullOrEmpty(refreshToken?.Value?.Value))
-            {
-                var authorizationResult = await _ecobeeService.Authorize(clientId.Value.Value);
-                _secretClient.SetSecret(SecretNames.EcobeeAuthorizationCode, authorizationResult.Code);
-            }
-           
+            
         }
+
     }
 }
