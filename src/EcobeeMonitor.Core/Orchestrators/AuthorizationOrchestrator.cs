@@ -1,6 +1,6 @@
 ﻿using Azure.Security.KeyVault.Secrets;
 using EcobeeMonitor.Core.Configuration;
-using EcobeeMonitor.Core.Models;
+using EcobeeMonitor.Core.Models.Ecobee;
 using EcobeeMonitor.Core.Services;
 using System;
 using System.Collections.Generic;

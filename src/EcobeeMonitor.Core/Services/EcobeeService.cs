@@ -1,9 +1,6 @@
-﻿using Azure.Security.KeyVault.Secrets;
-using EcobeeMonitor.Core.Models;
-using Newtonsoft.Json;
+﻿using EcobeeMonitor.Core.Models.Ecobee;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Net.Http;
 
 namespace EcobeeMonitor.Core.Services
 {
@@ -60,5 +57,7 @@ namespace EcobeeMonitor.Core.Services
 
             return data;
         }
+
+
     }
 }

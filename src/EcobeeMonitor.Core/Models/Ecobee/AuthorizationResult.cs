@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace EcobeeMonitor.Core.Models
+namespace EcobeeMonitor.Core.Models.Ecobee
 {
     public class AuthorizationResult
     {
