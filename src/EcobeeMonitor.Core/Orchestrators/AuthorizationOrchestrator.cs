@@ -4,7 +4,6 @@ using EcobeeMonitor.Core.Models;
 using EcobeeMonitor.Core.Models.Data;
 using EcobeeMonitor.Core.Repositories;
 using EcobeeMonitor.Core.Services;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EcobeeMonitor.Core.Orchestrators

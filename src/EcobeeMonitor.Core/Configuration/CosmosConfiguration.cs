@@ -14,5 +14,6 @@ namespace EcobeeMonitor.Core.Configuration
     public class CosmosContainers
     {
         public string Clients = "Clients";
+        public string Thermostats = "Thermostats";
     }
 }

@@ -12,8 +12,7 @@ namespace EcobeeMonitor.Core.Mappers
             return new ClientData
             {
                 ClientId = clientId,
-                AuthorizationStatus = AuthorizationStatus.New,
-                Thermostats = new List<string>()
+                AuthorizationStatus = AuthorizationStatus.New
             };
         }
     }
