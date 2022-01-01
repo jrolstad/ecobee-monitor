@@ -9,7 +9,7 @@ namespace EcobeeMonitor.Core.Models.Ecobee
         public DateTime? EndDate { get; set; }
         public int? StartInterval { get; set; }
         public int? EndInterval { get; set; }
-        public List<string> Columns { get; set; }
+        public string Columns { get; set; }
         public List<RuntimeReport> ReportList { get; set; }
         public List<RuntimeSensorReport> SensorList { get; set; }
     }

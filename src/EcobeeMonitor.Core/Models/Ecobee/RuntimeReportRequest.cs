@@ -9,15 +9,15 @@ namespace EcobeeMonitor.Core.Models.Ecobee
         [JsonProperty("selection")]
         public RuntimeReportSelection Selection { get; set; }
         [JsonProperty("startDate")]
-        public DateTime? StartDate { get; set; }
+        public string StartDate { get; set; }
         [JsonProperty("endDate")]
-        public DateTime? EndDate { get; set; }
+        public string EndDate { get; set; }
         [JsonProperty("startInterval")]
         public int? StartInterval { get; set; }
         [JsonProperty("endInterval")]
         public int? EndInterval { get; set; }
         [JsonProperty("columns")]
-        public List<string> Columns { get; set; }
+        public string Columns { get; set; }
         [JsonProperty("includeSensors")]
         public bool IncludeSensors { get; set; }
     }

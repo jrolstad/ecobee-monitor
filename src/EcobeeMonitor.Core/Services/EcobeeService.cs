@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Security.Policy;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace EcobeeMonitor.Core.Services
@@ -62,21 +64,21 @@ namespace EcobeeMonitor.Core.Services
         }
 
         public async Task<RuntimeReportResult> GetRuntimeReport(string accessToken,
-            DateTime? startDate,
-            DateTime? endDate,
-            List<string> columns,
-            string thermostatId,
+            DateTime startDate,
+            DateTime endDate,
+            IEnumerable<string> columns,
+            IEnumerable<string> thermostats,
             bool includeSensors)
         {
             var request = new RuntimeReportRequest
             {
-                StartDate = startDate,
-                EndDate = endDate,
-                Columns = columns,
+                StartDate = startDate.ToString("yyyy-MM-dd"),
+                EndDate = endDate.ToString("yyyy-MM-dd"),
+                Columns = string.Join(",",columns),
                 Selection = new RuntimeReportSelection
                 {
                     SelectionType = "thermostats",
-                    SelectionMatch = thermostatId
+                    SelectionMatch = string.Join(",",thermostats)
                 },
                 IncludeSensors = includeSensors
             };
@@ -92,11 +94,11 @@ namespace EcobeeMonitor.Core.Services
 
             response.EnsureSuccessStatusCode();
             var data = await response.Content.ReadAsAsync<RuntimeReportResult>();
-
+           
             return data;
 
         }
 
-
+        
     }
 }

@@ -30,11 +30,10 @@ namespace EcobeeMonitor.Core.Repositories
             return result;
         }
 
-        public async Task<ICollection<Thermostat>> GetForClient(string clientId)
+        public async Task<ICollection<Thermostat>> Get()
         {
             var query = _cosmosDbService
-                .Query<ThermostatData>(CosmosConfiguration.Containers.Thermostats)
-                .Where(d => d.ClientId == clientId);
+                .Query<ThermostatData>(CosmosConfiguration.Containers.Thermostats);
 
             var result = await _cosmosDbService.ExecuteRead(query, _mapper.Map);
 

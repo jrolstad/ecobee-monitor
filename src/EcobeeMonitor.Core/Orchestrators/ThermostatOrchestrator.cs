@@ -2,6 +2,8 @@
 using EcobeeMonitor.Core.Models;
 using EcobeeMonitor.Core.Repositories;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EcobeeMonitor.Core.Orchestrators
@@ -32,9 +34,12 @@ namespace EcobeeMonitor.Core.Orchestrators
             return data;
         }
 
-        public Task<ICollection<Thermostat>> GetForClient(string clientId)
+        public async Task<IEnumerable<Thermostat>> GetMonitored()
         {
-            return _thermostatRepository.GetForClient(clientId);
+            var data = await _thermostatRepository.Get();
+
+            return data
+                .Where(t => t.Monitoring?.IsSensorDataMonitored == true);        
         }
 
         public Task Remove(string thermostatId)
