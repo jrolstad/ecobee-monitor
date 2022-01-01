@@ -43,10 +43,20 @@ namespace EcobeeMonitor.Core.Orchestrators
             var start = DateTime.Now.AddDays(-1);
             var end = DateTime.Now;
             
-            var reportColumns = new List<string>
+            var reportColumns = new List<RuntimeReportColumn>
             {
-                RuntimeReportColumns.outdoorTemp.Name,
-                RuntimeReportColumns.zoneAveTemp.Name
+                RuntimeReportColumns.outdoorTemp,
+                RuntimeReportColumns.sky,
+                RuntimeReportColumns.zoneAveTemp,
+                RuntimeReportColumns.zoneHeatTemp,
+                RuntimeReportColumns.zoneCoolTemp,
+                RuntimeReportColumns.zoneHvacMode,
+                RuntimeReportColumns.auxHeat1,
+                RuntimeReportColumns.auxHeat2,
+                RuntimeReportColumns.auxHeat3,
+                RuntimeReportColumns.compCool1,
+                RuntimeReportColumns.compCool2,
+                RuntimeReportColumns.fan
             };
 
             var result = await _ecobeeService.GetRuntimeReport(accessToken: token,
