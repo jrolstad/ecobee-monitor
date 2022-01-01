@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace EcobeeMonitor.Core.Models.Data
 {
@@ -12,5 +11,14 @@ namespace EcobeeMonitor.Core.Models.Data
         public string Area { get; set; }
         public string ClientId { get; set; }
         public List<string> Thermostats { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public AuthorizationStatus AuthorizationStatus { get; set; }
+    }
+
+    public enum AuthorizationStatus
+    {
+        New,
+        Requested,
+        Approved
     }
 }
