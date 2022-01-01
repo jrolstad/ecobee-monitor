@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EcobeeMonitor.Core.Configuration
+﻿namespace EcobeeMonitor.Core.Configuration
 {
     public static class CosmosConfiguration
     {

@@ -1,12 +1,9 @@
-using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using EcobeeMonitor.Core.Orchestrators;
 using EcobeeMonitor.Worker.Extensions;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
-using Microsoft.Extensions.Logging;
 
 namespace EcobeeMonitor.Worker.Functions
 {

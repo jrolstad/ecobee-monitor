@@ -1,8 +1,6 @@
 ﻿using EcobeeMonitor.Core.Configuration;
-using EcobeeMonitor.Core.Mappers;
 using EcobeeMonitor.Core.Models;
 using EcobeeMonitor.Core.Models.Data;
-using EcobeeMonitor.Core.Repositories;
 using EcobeeMonitor.Core.Services;
 using System.Threading.Tasks;
 
