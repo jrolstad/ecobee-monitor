@@ -1,6 +1,7 @@
 ﻿using Azure.Core;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using EcobeeMonitor.Core.Mappers;
 using EcobeeMonitor.Core.Orchestrators;
 using EcobeeMonitor.Core.Repositories;
 using EcobeeMonitor.Core.Services;
@@ -17,10 +18,15 @@ namespace EcobeeMonitor.Core.Configuration
         {
             services.AddHttpClient();
 
+            services.AddTransient<ClientDataMapper>();
+            services.AddTransient<ThermostatMapper>();
+
             services.AddTransient<AuthorizationOrchestrator>();
             services.AddTransient<RuntimeReportOrchestrator>();
+            services.AddTransient<ThermostatOrchestrator>();
 
             services.AddTransient<ClientRepository>();
+            services.AddTransient<ThermostatRepository>();
 
             services.AddTransient<EcobeeService>();
             services.AddTransient<SecretService>();
