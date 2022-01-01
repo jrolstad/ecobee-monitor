@@ -18,6 +18,7 @@ namespace EcobeeMonitor.Core.Configuration
         {
             services.AddHttpClient();
 
+            services.AddTransient<AuthorizationResponseMapper>();
             services.AddTransient<ClientDataMapper>();
             services.AddTransient<ThermostatMapper>();
 

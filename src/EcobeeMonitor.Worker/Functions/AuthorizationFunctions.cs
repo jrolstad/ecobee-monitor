@@ -29,10 +29,8 @@ namespace EcobeeMonitor.Worker.Functions
         public async Task<HttpResponseData> ApproveAuthorization([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "authorization/{clientId}/approve")] HttpRequestData req,
             string clientId)
         {
-            var parameters = req.Url.ParseQueryString();
-            var code=parameters["code"];
 
-            await _authorizationOrchestrator.ApproveAuthorization(clientId, code);
+            await _authorizationOrchestrator.ApproveAuthorization(clientId);
 
             return await req.OkResponseAsync();
         }
