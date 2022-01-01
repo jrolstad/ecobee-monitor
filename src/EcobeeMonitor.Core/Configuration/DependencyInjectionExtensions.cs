@@ -21,14 +21,16 @@ namespace EcobeeMonitor.Core.Configuration
             services.AddTransient<AuthorizationResponseMapper>();
             services.AddTransient<ClientDataMapper>();
             services.AddTransient<ThermostatMapper>();
+            services.AddTransient<ThermostatObservationMapper>();
 
             services.AddTransient<AuthorizationOrchestrator>();
             services.AddTransient<ClientOrchestrator>();
-            services.AddTransient<RuntimeReportOrchestrator>();
+            services.AddTransient<ThermostatMonitoringOrchestrator>();
             services.AddTransient<ThermostatOrchestrator>();
 
             services.AddTransient<ClientRepository>();
             services.AddTransient<ThermostatRepository>();
+            services.AddTransient<ThermostatObservationRepository>();
 
             services.AddTransient<EcobeeService>();
             services.AddTransient<SecretService>();

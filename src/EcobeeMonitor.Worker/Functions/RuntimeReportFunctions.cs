@@ -7,9 +7,9 @@ namespace EcobeeMonitor.Worker
 {
     public class RuntimeReportFunctions
     {
-        private readonly RuntimeReportOrchestrator _orchestrator;
+        private readonly ThermostatMonitoringOrchestrator _orchestrator;
 
-        public RuntimeReportFunctions(RuntimeReportOrchestrator orchestrator)
+        public RuntimeReportFunctions(ThermostatMonitoringOrchestrator orchestrator)
         {
             _orchestrator = orchestrator;
         }
