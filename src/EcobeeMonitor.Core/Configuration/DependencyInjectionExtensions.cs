@@ -22,6 +22,7 @@ namespace EcobeeMonitor.Core.Configuration
             services.AddTransient<ThermostatMapper>();
 
             services.AddTransient<AuthorizationOrchestrator>();
+            services.AddTransient<ClientOrchestrator>();
             services.AddTransient<RuntimeReportOrchestrator>();
             services.AddTransient<ThermostatOrchestrator>();
 

@@ -1,7 +1,4 @@
 ﻿using EcobeeMonitor.Core.Models.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EcobeeMonitor.Core.Mappers
 {

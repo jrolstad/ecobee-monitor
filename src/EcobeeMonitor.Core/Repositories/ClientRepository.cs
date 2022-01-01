@@ -2,6 +2,7 @@
 using EcobeeMonitor.Core.Services;
 using System.Threading.Tasks;
 using EcobeeMonitor.Core.Configuration;
+using System.Collections.Generic;
 
 namespace EcobeeMonitor.Core.Repositories
 {
@@ -13,6 +14,17 @@ namespace EcobeeMonitor.Core.Repositories
         {
             _cosmosDbService = cosmosDbService;
         }
+
+        public async Task<ICollection<ClientData>> Get()
+        {
+            var query = _cosmosDbService
+                .Query<ClientData>(CosmosConfiguration.Containers.Clients);
+
+            var result = await _cosmosDbService.ExecuteRead(query, d=>d);
+
+            return result;
+        }
+
         public Task<ClientData> Get(string clientId)
         {
             return _cosmosDbService.Get<ClientData>(clientId, CosmosConfiguration.Containers.Clients, CosmosConfiguration.DefaultPartitionKey);

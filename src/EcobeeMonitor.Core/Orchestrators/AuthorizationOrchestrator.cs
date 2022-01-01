@@ -12,25 +12,22 @@ namespace EcobeeMonitor.Core.Orchestrators
     {
         private readonly EcobeeService _ecobeeService;
         private readonly SecretService _secretService;
-        private readonly ClientRepository _clientRepository;
-        private readonly ClientDataMapper _clientDataMapper;
+        private readonly ClientOrchestrator _clientOrchestrator;
 
         public AuthorizationOrchestrator(EcobeeService ecobeeService,
             SecretService secretService,
-            ClientRepository clientRepository,
-            ClientDataMapper clientDataMapper)
+            ClientOrchestrator clientOrchestrator)
         {
             _ecobeeService = ecobeeService;
             _secretService = secretService;
-            _clientRepository = clientRepository;
-            _clientDataMapper = clientDataMapper;
+            _clientOrchestrator = clientOrchestrator;
         }
 
         public async Task<AuthorizationResult> RequestAuthorization(string clientId)
         {
             var authorizationResult = await _ecobeeService.Authorize(clientId);
 
-            await SaveAuthorizationStatus(clientId, AuthorizationStatus.Requested);
+            await _clientOrchestrator.SaveAuthorizationStatus(clientId, AuthorizationStatus.Requested);
 
             return authorizationResult;
         }
@@ -42,23 +39,7 @@ namespace EcobeeMonitor.Core.Orchestrators
             var token = await _ecobeeService.RequestAccessToken(clientId, code);
             await _secretService.Save(clientId, SecretNames.EcobeeRefreshToken, token.RefreshToken);
 
-            await SaveAuthorizationStatus(clientId, AuthorizationStatus.Approved);
-        }
-
-        private async Task SaveAuthorizationStatus(string clientId, AuthorizationStatus status)
-        {
-            var data = await GetClient(clientId);
-
-            data.AuthorizationStatus = status;
-            await _clientRepository.Save(data);
-        }
-
-        private async Task<ClientData> GetClient(string clientId)
-        {
-            var data = await _clientRepository.Get(clientId);
-            if (data == null) data = _clientDataMapper.Map(clientId);
-
-            return data;
+            await _clientOrchestrator.SaveAuthorizationStatus(clientId, AuthorizationStatus.Approved);
         }
 
         public async Task<string> GetAccessToken(string clientId)
