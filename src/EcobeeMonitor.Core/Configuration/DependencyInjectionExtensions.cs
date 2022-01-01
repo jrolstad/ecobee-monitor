@@ -23,6 +23,7 @@ namespace EcobeeMonitor.Core.Configuration
             services.AddTransient<ClientRepository>();
 
             services.AddTransient<EcobeeService>();
+            services.AddTransient<SecretService>();
 
             ConfigureKeyVault(services);
             ConfigureCosmosDb(services);
