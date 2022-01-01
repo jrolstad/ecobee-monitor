@@ -23,7 +23,7 @@ namespace EcobeeMonitor.Core.Orchestrators
 
         public async Task CaptureData()
         {
-            var token = await _authorizationOrchestrator.GetAccessToken();
+            var token = await _authorizationOrchestrator.GetAccessToken(null);
 
 
         }

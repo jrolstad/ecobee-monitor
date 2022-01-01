@@ -1,7 +1,4 @@
 ﻿using Azure.Security.KeyVault.Secrets;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EcobeeMonitor.Core.Services
@@ -15,16 +12,23 @@ namespace EcobeeMonitor.Core.Services
             _secretClient = secretClient;
         }
 
-        public async Task<string> Get(string name)
+        public async Task<string> Get(string clientId, string name)
         {
-            var secret = await _secretClient.GetSecretAsync(name);
+            var resolvedName = GetResolvedSecretname(clientId, name);
+            var secret = await _secretClient.GetSecretAsync(resolvedName);
 
             return secret?.Value?.Value;
         }
 
-        public Task Save(string name, string value)
+        public Task Save(string clientId, string name, string value)
         {
-            return _secretClient.SetSecretAsync(name, value);
+            var resolvedName = GetResolvedSecretname(clientId, name);
+            return _secretClient.SetSecretAsync(resolvedName, value);
+        }
+
+        private string GetResolvedSecretname(string clientId, string name)
+        {
+            return $"{name}-{clientId}";
         }
     }
 }
