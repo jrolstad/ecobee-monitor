@@ -8,6 +8,12 @@
             public string BaseUri = "KeyVault_BaseUri";
             public string ManagedIdentityClient = "KeyVault_ManagedIdentityClientId";
         }
+
+        public static CosmosConfigurationNames Cosmos = new CosmosConfigurationNames();
+        public class CosmosConfigurationNames
+        {
+            public string BaseUri = "Cosmos_BaseUri";
+        }
     }
 
     
