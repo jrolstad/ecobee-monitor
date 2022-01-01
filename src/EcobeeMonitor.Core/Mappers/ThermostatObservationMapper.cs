@@ -1,11 +1,7 @@
-﻿using EcobeeMonitor.Core.Extensions;
-using EcobeeMonitor.Core.Models;
+﻿using EcobeeMonitor.Core.Models;
 using EcobeeMonitor.Core.Models.Ecobee;
 using EcobeeMonitor.Core.Services;
-using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EcobeeMonitor.Core.Mappers
 {
@@ -13,12 +9,15 @@ namespace EcobeeMonitor.Core.Mappers
     {
         private readonly DeviceDataMapper _deviceDataMapper;
         private readonly DeviceObservationMapper _deviceObservationMapper;
+        private readonly SystemObservationDataMapper _systemObservationDataMapper;
 
         public ThermostatObservationMapper(DeviceDataMapper deviceDataMapper,
-            DeviceObservationMapper deviceObservationMapper)
+            DeviceObservationMapper deviceObservationMapper,
+            SystemObservationDataMapper systemObservationDataMapper)
         {
             _deviceDataMapper = deviceDataMapper;
             _deviceObservationMapper = deviceObservationMapper;
+            _systemObservationDataMapper = systemObservationDataMapper;
         }
 
         public ThermostatObservation Map(string thermostatId, RuntimeReportResult toMap)
@@ -30,7 +29,8 @@ namespace EcobeeMonitor.Core.Mappers
                 At = ClockService.Now,
                 ThermostatId = thermostatId,
                 Devices = devices,
-                DeviceObservations = _deviceObservationMapper.Map(toMap, devices)
+                DeviceObservations = _deviceObservationMapper.Map(toMap, devices),
+                SystemObsevations = _systemObservationDataMapper.Map(toMap)
             };
         }
     }

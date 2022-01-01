@@ -21,15 +21,15 @@ namespace EcobeeMonitor.Core.Mappers
             foreach (var row in data)
             {
                 var items = row.Split(",");
+                
                 var date = items.GetColumnValue("date", positions);
                 var time = items.GetColumnValue("time", positions);
+                var observedAt = DateTime.Parse($"{date} {time}");
 
                 foreach (var device in devices)
                 {
                     var deviceData = items.GetColumnValue(device.SensorId, positions);
                     var key = $"{device.DeviceId}|{date}|{time}";
-
-                    var observedAt = DateTime.Parse($"{date} {time}");
 
                     results.AddOrUpdate(key,
                         NewDeviceObservation(device, deviceData, observedAt),
@@ -39,7 +39,7 @@ namespace EcobeeMonitor.Core.Mappers
             }
 
             var observationsWithData = results.Values
-                .Where(o => o.Humidity.HasValue || o.Temperature.HasValue)
+                .Where(HasData)
                 .ToList();
 
             return observationsWithData;
@@ -71,9 +71,14 @@ namespace EcobeeMonitor.Core.Mappers
             return existing;
         }
 
+        private bool HasData(DeviceObservationData item)
+        {
+            return item.Humidity.HasValue || item.Temperature.HasValue;
+        }
+
         private Dictionary<string, int> ParseFieldPositions(ICollection<RuntimeSensorReport> toParse)
         {
-            var result = new Dictionary<string, int>();
+            var result = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
             var columns = toParse.SelectMany(s => s.Columns);
 

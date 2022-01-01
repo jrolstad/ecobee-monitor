@@ -77,6 +77,7 @@ namespace EcobeeMonitor.Core.Orchestrators
             return new List<RuntimeReportColumn>
             {
                 RuntimeReportColumns.outdoorTemp,
+                RuntimeReportColumns.outdoorHumidity,
                 RuntimeReportColumns.sky,
                 RuntimeReportColumns.zoneAveTemp,
                 RuntimeReportColumns.zoneHeatTemp,
@@ -87,7 +88,8 @@ namespace EcobeeMonitor.Core.Orchestrators
                 RuntimeReportColumns.auxHeat3,
                 RuntimeReportColumns.compCool1,
                 RuntimeReportColumns.compCool2,
-                RuntimeReportColumns.fan
+                RuntimeReportColumns.fan,
+                RuntimeReportColumns.hvacMode
             };
         }
     }

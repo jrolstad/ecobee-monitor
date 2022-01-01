@@ -22,6 +22,8 @@ namespace EcobeeMonitor.Core.Configuration
             services.AddTransient<ClientDataMapper>();
             services.AddTransient<DeviceDataMapper>();
             services.AddTransient<DeviceObservationMapper>();
+            services.AddTransient<SkyMapper>();
+            services.AddTransient<SystemObservationDataMapper>();
             services.AddTransient<ThermostatMapper>();
             services.AddTransient<ThermostatObservationMapper>();
 

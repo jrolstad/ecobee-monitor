@@ -38,8 +38,10 @@ namespace EcobeeMonitor.Core.Models
     {
         public DateTime At { get; set; }
         public double? OutdoorTemperature { get; set; }
-        public double? SkyCover { get; set; }
+        public double? OutdoorHumidity { get; set; }
+        public string SkyCover { get; set; }
 
+        public string HvacMode { get; set; }
         public string ZoneHvacMode { get; set; }
         public double? ZoneAverageTemperature { get; set; }
         public double? ZoneHeatTemperature { get; set; }
