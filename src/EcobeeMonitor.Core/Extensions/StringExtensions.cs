@@ -1,4 +1,6 @@
-﻿namespace EcobeeMonitor.Core.Extensions
+﻿using System.Collections.Generic;
+
+namespace EcobeeMonitor.Core.Extensions
 {
     public static class StringExtensions
     {
@@ -8,6 +10,15 @@
 
             if(double.TryParse(value, out var result)) return result;
 
+            return null;
+        }
+
+        public static string GetColumnValue(this string[] data, string field, Dictionary<string, int> positions)
+        {
+            if (positions.TryGetValue(field, out var index))
+            {
+                return data[index];
+            }
             return null;
         }
     }

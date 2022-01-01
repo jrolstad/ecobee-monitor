@@ -20,6 +20,8 @@ namespace EcobeeMonitor.Core.Configuration
 
             services.AddTransient<AuthorizationResponseMapper>();
             services.AddTransient<ClientDataMapper>();
+            services.AddTransient<DeviceDataMapper>();
+            services.AddTransient<DeviceObservationMapper>();
             services.AddTransient<ThermostatMapper>();
             services.AddTransient<ThermostatObservationMapper>();
 
