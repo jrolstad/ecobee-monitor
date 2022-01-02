@@ -2,7 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 
-namespace EcobeeMonitor.Worker.Extensions
+namespace EcobeeMonitor.Api.Extensions
 {
     public static class HttpRequestExtensions
     {

@@ -1,11 +1,11 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using EcobeeMonitor.Core.Orchestrators;
-using EcobeeMonitor.Worker.Extensions;
+using EcobeeMonitor.Api.Extensions;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 
-namespace EcobeeMonitor.Worker.Functions
+namespace EcobeeMonitor.Api.Functions
 {
     public class AuthorizationFunctions
     {
