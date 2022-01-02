@@ -33,31 +33,37 @@ namespace EcobeeMonitor.Core.Orchestrators
 
         public async Task CaptureData()
         {
+            var start = ClockService.Now.Date.AddDays(-1);
+            var end = ClockService.Now.Date.AddDays(1);
+
             var thermostats = await _thermostatOrchestrator.GetMonitored();
             var thermostatsByClient = thermostats
                 .GroupBy(t => t.ClientId);
 
             var captureTasks = thermostatsByClient
-                .Select(t=>CaptureRuntimeData(clientId: t.Key,thermostats: t));
+                .Select(t=>CaptureRuntimeData(clientId: t.Key,thermostats: t, start:start, end:end));
 
             await Task.WhenAll(captureTasks);
         }
 
-        private async Task CaptureRuntimeData(string clientId, IEnumerable<Thermostat> thermostats)
+        private async Task CaptureRuntimeData(string clientId, 
+            IEnumerable<Thermostat> thermostats,
+            DateTime start,
+            DateTime end)
         {
             var token = await _authorizationOrchestrator.GetAccessToken(clientId);
 
             var thermostatTasks = thermostats
-                .Select(t => CaptureThermostatData(token, t));
+                .Select(t => CaptureThermostatData(token, t, start, end));
 
             await Task.WhenAll(thermostatTasks);
         }
 
-        private async Task CaptureThermostatData(string accessToken, Thermostat thermostat)
-        {
-
-            var start = ClockService.Now.AddDays(-1);
-            var end = ClockService.Now;
+        private async Task CaptureThermostatData(string accessToken, 
+            Thermostat thermostat,
+            DateTime start,
+            DateTime end)
+        { 
             var thermostatId = thermostat.ThermostatId;
             var reportColumns = GetRuntimeDataFields();
 
