@@ -74,7 +74,7 @@ namespace EcobeeMonitor.Core.Orchestrators
                 thermostats: new[] {thermostatId},
                 includeSensors: true);
 
-            var result = _thermostatRuntimeReportMapper.Map(thermostatId, data);
+            var result = _thermostatRuntimeReportMapper.Map(thermostatId, data, start, end);
             await _thermostatObservationRepository.Save(result);
         }
 

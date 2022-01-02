@@ -40,13 +40,12 @@ namespace EcobeeMonitor.Core.Repositories
             client.CreateIfNotExists();
 
             return client;
-
         }
 
         private static string ResolveDirectoryPath(ThermostatObservation toSave)
         {
-            var now = ClockService.Now;
-            var directoryPath = $"{now:yyyy}/{now:MM}/{toSave.ThermostatId}";
+            var directoryPath = $"{toSave.At:yyyy}/{toSave.At:MM}/{toSave.ThermostatId}";
+
             return directoryPath;
         }
 
@@ -60,7 +59,7 @@ namespace EcobeeMonitor.Core.Repositories
 
         private static string ResolveFileName(ThermostatObservation toSave)
         {
-            return $"{toSave.At: yyyy-MM-dd-hh-mm}.json";
+            return $"{toSave.At: yyyy-MM-dd hh:mm:ss}.json";
         }
 
         private static MemoryStream ConvertToStream(ThermostatObservation toSave)

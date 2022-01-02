@@ -7,6 +7,9 @@ namespace EcobeeMonitor.Core.Models
     {
         public string ThermostatId { get; set; }
         public DateTime At { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+
         public ICollection<DeviceData> Devices { get; set; }
         public ICollection<DeviceObservationData> DeviceObservations { get; set; }
         public ICollection<SystemObservationData> SystemObsevations { get; set; }
