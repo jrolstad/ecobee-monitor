@@ -1,6 +1,7 @@
 ﻿using Azure.Core;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using Azure.Storage.Files.DataLake;
 using EcobeeMonitor.Core.Mappers;
 using EcobeeMonitor.Core.Orchestrators;
 using EcobeeMonitor.Core.Repositories;
@@ -41,6 +42,7 @@ namespace EcobeeMonitor.Core.Configuration
 
             ConfigureKeyVault(services);
             ConfigureCosmosDb(services);
+            ConfigureAzureDataLake(services);
         }
 
         private static void ConfigureKeyVault(IServiceCollection services)
@@ -107,6 +109,23 @@ namespace EcobeeMonitor.Core.Configuration
 
             var client = new CosmosClient(endpoint, key, options);
             return client;
+        }
+
+        private static void ConfigureAzureDataLake(IServiceCollection services)
+        {
+            services.AddScoped(provider => 
+            {
+                var configuration = provider.GetService<IConfiguration>();
+                var endpoint = configuration[ConfigurationNames.DataLake.BaseUri];
+                var endpointUrl = new Uri(endpoint);
+                var managedIdentityClientId = configuration[ConfigurationNames.DataLake.ManagedIdentityClient];
+
+                var credentials = GetCredential(managedIdentityClientId);
+
+                var client = new DataLakeServiceClient(endpointUrl, credentials);
+
+                return client;
+            });
         }
     }
 }

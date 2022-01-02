@@ -14,6 +14,13 @@
         {
             public string BaseUri = "Cosmos_BaseUri";
         }
+
+        public static DataLakeConfigurationNames DataLake = new DataLakeConfigurationNames();
+        public class DataLakeConfigurationNames
+        {
+            public string BaseUri = "DataLake_BaseUri";
+            public string ManagedIdentityClient = "DataLake_ManagedIdentityClientId";
+        }
     }
 
     
