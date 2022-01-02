@@ -73,8 +73,8 @@ namespace EcobeeMonitor.Core.Repositories
         private static void WriteToFile(DataLakeFileClient file, MemoryStream dataStream)
         {
             var fileSize = dataStream.Length;
-            file.AppendAsync(dataStream, offset: 0);
-            file.FlushAsync(position: fileSize);
+            file.Append(dataStream, offset: 0);
+            file.Flush(position: fileSize);
         }
     }
 }
