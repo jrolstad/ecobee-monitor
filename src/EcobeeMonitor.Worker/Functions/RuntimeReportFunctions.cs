@@ -15,7 +15,7 @@ namespace EcobeeMonitor.Worker
         }
 
         [Function("runtimereport-retrieve")]
-        public Task Run([TimerTrigger("0 */1 * * * *")] TimerInfo myTimer)
+        public Task Run([TimerTrigger("%RuntimeReport_Cron%")] TimerInfo myTimer)
         {
             return _orchestrator.CaptureData();
         }

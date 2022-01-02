@@ -3,7 +3,6 @@ using EcobeeMonitor.Core.Models;
 using System.Threading.Tasks;
 using EcobeeMonitor.Core.Configuration;
 using System.IO;
-using EcobeeMonitor.Core.Services;
 using System.Text;
 using Newtonsoft.Json;
 
