@@ -67,6 +67,7 @@ namespace EcobeeMonitor.Core.Repositories
             var dataAsString = JsonConvert.SerializeObject(toSave);
             var byteArray = Encoding.ASCII.GetBytes(dataAsString);
             var stream = new MemoryStream(byteArray);
+
             return stream;
         }
 
