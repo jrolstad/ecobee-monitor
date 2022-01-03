@@ -8,7 +8,7 @@ namespace EcobeeMonitor.Api.Functions
     public class HealthFunctions
     {
 
-        [Function("HealthFunctions")]
+        [Function("health-probe")]
         public async Task<HttpResponseData> Probe([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route="health/probe")] HttpRequestData req)
         {
             return await req.OkResponseAsync();
