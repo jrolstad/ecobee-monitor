@@ -3,7 +3,7 @@
     public static class CosmosConfiguration
     {
         public static string DefaultPartitionKey = "Default";
-        public static string DatabaseId = "ecobee-monitor";
+        public static string DatabaseId = "ecobeemonitor";
         public static CosmosContainers Containers = new CosmosContainers();
     }
 
